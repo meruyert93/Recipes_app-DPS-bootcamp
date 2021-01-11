@@ -2,18 +2,19 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'  
 import  recipeCreate from "./recipeCreate";
 import  recipeGet from "./recipeGet";
+import Container from '@material-ui/core/Container';
 import '../App.css';
 
 const App = () => {
     return (
-        <div>
+        <Container maxWidth="sm">
             <Router>            
                 <Switch>
                     <Route exact path="/"  component={recipeGet}/>
                     <Route path="/recipes/new" component={recipeCreate}/>
                 </Switch>
             </Router>
-        </div>
+        </Container>
     );
 };
 
