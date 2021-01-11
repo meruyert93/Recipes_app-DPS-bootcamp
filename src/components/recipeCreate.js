@@ -2,11 +2,17 @@ import { React, useState } from 'react';
 import { TextField } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import IconButton from '@material-ui/core/IconButton';
 
 
 
 const recipeCreate = () => {
+    const addMoreInput = () => {
+        
+    }
+
+
 
     return (
         <div className='root'>
@@ -28,6 +34,9 @@ const recipeCreate = () => {
                                 label="Add your ingredient one by one" 
                                 type="text"
                             />
+                            <AddCircleIcon>
+                                <IconButton onClick={}/>
+                            </AddCircleIcon>
                         </div>
                     </Paper>
                 </Grid>
