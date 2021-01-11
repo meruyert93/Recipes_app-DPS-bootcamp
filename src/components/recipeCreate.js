@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 const recipeCreate = () => {
     const addMoreInput = () => {
-        
+        console.log('boo')
     }
 
 
@@ -35,7 +35,7 @@ const recipeCreate = () => {
                                 type="text"
                             />
                             <AddCircleIcon>
-                                <IconButton onClick={}/>
+                                <IconButton onClick={addMoreInput}/>
                             </AddCircleIcon>
                         </div>
                     </Paper>
