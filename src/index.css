@@ -344,3 +344,7 @@ Variables
 .alert-section {
     margin: 10rem;
 }
+
+.cursor {
+    cursor: pointer;
+}

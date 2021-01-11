@@ -1,5 +1,5 @@
 import  React   from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,15 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import List from './List'
 import Alert from './Alert'
 
-
+// const getLocalStorage = () => {
+//     let list = localStorage.getItem('data');
+//     if (list) {
+//         return JSON.parse(localStorage.getItem('data'))
+//     }
+//     else {
+//         return []
+//     }
+// }
 
 function RecipeCreate ()  {
     const [name, setName] = useState('');
@@ -134,6 +142,10 @@ function RecipeCreate ()  {
         setName(name);
     }
 
+    // useEffect(()=> {
+    //     localStorage.setItem('data', JSON.stringify(name, time, ingredient, description))
+    // }, [ingredient, description, name, time])
+
     return (
         <div className='root'>
             <Grid container spacing={3}>
@@ -166,7 +178,7 @@ function RecipeCreate ()  {
                                 value={ingredientName}
                                 onChange={(e) => {setIngredientName(e.target.value)}}
                             />
-                            <AddCircleIcon onClick={addMoreIngredient}>
+                            <AddCircleIcon className="cursor" onClick={addMoreIngredient}>
                             </AddCircleIcon>
                             <TextField
                                 label="Add neccessary steps one by one" 
@@ -175,7 +187,7 @@ function RecipeCreate ()  {
                                 value={descriptionName}
                                 onChange={(e) => {setDescriptionName(e.target.value)}}
                             />
-                            <AddCircleIcon onClick={addMoreDescription}>
+                            <AddCircleIcon className="cursor" onClick={addMoreDescription}>
                             </AddCircleIcon>
 
                         </div>
