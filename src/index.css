@@ -215,8 +215,10 @@ Variables
   .form-control {
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
   .grocery {
+      margin: 1.25rem;
     padding: 0.25rem;
     padding-left: 1rem;
     background: var(--clr-grey-10);
@@ -234,14 +236,15 @@ Variables
   .submit-btn {
     background: var(--clr-primary-8);
     border-color: transparent;
-    flex: 0 0 5rem;
-    display: grid;
+    /* flex: 0 0 5rem;
+    display: grid; */
+    display: flex;
+    width: 3rem;
     align-items: center;
     padding: 0.25rem;
     text-transform: capitalize;
     letter-spacing: 2px;
-    border-top-right-radius: var(--radius);
-    border-bottom-right-radius: var(--radius);
+    border-radius: var(--radius);
     cursor: pointer;
     content: var(--clr-primary-5);
     transition: var(--transition);
