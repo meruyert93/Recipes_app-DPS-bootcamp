@@ -340,3 +340,7 @@ Variables
   display: "grid";
   grid-template-columns: 1fr;
 }
+
+.alert-section {
+    margin: 10rem;
+}

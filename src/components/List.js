@@ -2,7 +2,7 @@ import React from 'react'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
 
-const List = ({name, time, ingredient, description}) => {
+const List = ({name, time, ingredients, descriptions, removeIngredient, removeDescription, removeName, removeTime, editIngredient, editDescription, editName}) => {
     return (
         <div className="grocery-list">    
                     <article className="grocery-item">
@@ -10,11 +10,11 @@ const List = ({name, time, ingredient, description}) => {
                         <p className="title">{name}</p>
                         <div className="btn-container">
                             <button type="button" className="edit-btn"
-                                onClick={() => {}}>
+                                onClick={() => {editName()}}>
                                 <FaEdit/>
                             </button>
                             <button type="button" className="delete-btn"
-                                onClick={() => {}}>
+                                onClick={() => {removeName()}}>
                                 <FaTrash/>
                             </button>
                         </div>
@@ -29,39 +29,58 @@ const List = ({name, time, ingredient, description}) => {
                                 <FaEdit/>
                             </button>
                             <button type="button" className="delete-btn"
-                                onClick={() => {}}>
+                                onClick={() => {removeTime()}}>
                                 <FaTrash/>
                             </button>
                         </div>
                     </article>
                     <article className="grocery-item">
                         <h4>Ingredients: </h4>
-                        <p>{ingredient} </p>
-                        <div className="btn-container">
-                            <button type="button" className="edit-btn"
-                                onClick={() => {}}>
-                                <FaEdit/>
-                            </button>
-                            <button type="button" className="delete-btn"
-                                onClick={() => {}}>
-                                <FaTrash/>
-                            </button>
-                        </div>
+                        <ul> 
+                        {ingredients.map((item) => {
+                            const {id, ingredientName} = item
+                            return (
+                                <li key={id} className="grocery-item">
+                                    <p className="title">{ingredientName} </p>
+                                    <div className="btn-container">
+                                        <button type="button" className="edit-btn"
+                                            onClick={() => {editIngredient(id)}}>
+                                            <FaEdit/>
+                                        </button>
+                                        <button type="button" className="delete-btn"
+                                            onClick={() => {removeIngredient(id)}}>
+                                            <FaTrash/>
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                        </ul>
+                      
                     </article>
 
                     <article className="grocery-item">
                         <h4>Description: </h4>
-                        <p>{ingredient} </p>
-                        <div className="btn-container">
-                            <button type="button" className="edit-btn"
-                                onClick={() => {}}>
-                                <FaEdit/>
-                            </button>
-                            <button type="button" className="delete-btn"
-                                onClick={() => {}}>
-                                <FaTrash/>
-                            </button>
-                        </div>
+                        <ul> 
+                        {descriptions.map((item) => {
+                            const {id, descriptionName} = item
+                            return (
+                                <li key={id} className="grocery-item">
+                                    <p className="title">{descriptionName} </p>
+                                    <div className="btn-container">
+                                        <button type="button" className="edit-btn"
+                                            onClick={() => {editDescription(id)}}>
+                                            <FaEdit/>
+                                        </button>
+                                        <button type="button" className="delete-btn"
+                                            onClick={() => {removeDescription(id)}}>
+                                            <FaTrash/>
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                        </ul>
                     </article>
               
         </div>
