@@ -20,19 +20,23 @@ const recipeCreate = () => {
                 <Grid item xs={12}>
                     <Paper className='paper' elevation={3}>
                         <h3>Create your own recipe</h3>
-                        <div>
+                        <div className='textFields'>
                             <TextField
                                 label="Enter name of your recipe" 
                                 type="text"
+                                fullWidth="true"
                     
                             />
                             <TextField
                                 label="Add the time needed" 
                                 type="number"
+                                fullWidth="true"
+                                
                             />
                             <TextField
                                 label="Add your ingredient one by one" 
-                                type="text"
+                                type="number"
+                                fullWidth="true"
                             />
                             <AddCircleIcon>
                                 <IconButton onClick={addMoreInput}/>
