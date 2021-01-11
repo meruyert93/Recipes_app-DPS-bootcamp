@@ -7,7 +7,7 @@ import '../App.css';
 
 const App = () => {
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="lg">
             <Router>            
                 <Switch>
                     <Route exact path="/"  component={recipeGet}/>

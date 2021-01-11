@@ -323,3 +323,20 @@ Variables
     color: var(--clr-red-dark);
   }
   
+
+/*our styles*/
+.root {
+    flex-grow: 1,
+}
+
+.paper { 
+    margin: 5rem;
+    padding: 2rem;
+    text-align: center;
+    color: grey;
+  }
+
+.textFields {
+  display: "grid";
+  grid-template-columns: 1fr;
+}
