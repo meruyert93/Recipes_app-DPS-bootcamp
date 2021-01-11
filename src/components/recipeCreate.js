@@ -4,11 +4,35 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 
+
 const recipeCreate = () => {
+
     return (
-        <div>
-            <Grid>
-                
+        <div className='root'>
+            <Grid container spacing={4}>
+                <Grid item xs={12}>
+                    <Paper className='paper' elevation={3}>
+                        <h3>Create your own recipe</h3>
+                        <div>
+                            <TextField
+                                label="Enter name of your recipe" 
+                                type="text"
+                    
+                            />
+                            <TextField
+                                label="Add the time needed" 
+                                type="number"
+                            />
+                            <div>
+                            <TextField
+                                label="Add your ingredient one by one" 
+                                type="number"
+                            />
+
+                            </div>
+                        </div>
+                    </Paper>
+                </Grid>
             </Grid>
         </div>
     )
