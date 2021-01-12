@@ -7,18 +7,22 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import List from './List'
 import Alert from './Alert'
 
-// const getLocalStorage = () => {
-//     let list = localStorage.getItem('data');
-//     if (list) {
-//         return JSON.parse(localStorage.getItem('data'))
-//     }
-//     else {
-//         return []
-//     }
-// }
+const getLocalStorage = () => {
+    let data = localStorage.getItem('data');
+    if (data) {
+        return console.log(JSON.parse(localStorage.getItem('data')))
+    }
+    else {
+        return []
+
+        
+    }
+}
 
 function RecipeCreate ()  {
     const [name, setName] = useState('');
+    const [nameDisplay, setNameDisplay] = useState('');
+    const [timeDisplay, setTimeDisplay] = useState('')
     const [time, setTime] = useState('');
     const [ingredientName, setIngredientName] = useState('');
     const [ingredient, setIngredient] = useState([]);
@@ -27,6 +31,19 @@ function RecipeCreate ()  {
     const [isEditing, setIsEditing] = useState(false);
     const [editID, setEditID] = useState(null);
     const [alert, setAlert] = useState({show: false, msg:'', type:''})
+
+    const addName = () => {
+        showAlert(true, 'success', 'Item is added')
+         setNameDisplay(name)
+        setName('');
+            
+    }
+
+    const addTime = () => {
+        showAlert(true, 'success', 'Item is added')
+        setTimeDisplay(time)
+        setTime('');
+    }
 
     const addMoreIngredient = () => {
         //console.log('boo')
@@ -89,14 +106,14 @@ function RecipeCreate ()  {
 
     const submitButton = (e) => {
         e.preventDefault();
-        console.log('guu')
+        getLocalStorage();
         
     }
 
     const clearList = () => {
         showAlert(true, 'danger', 'emptylist')
-        setName('');
-        setTime('');
+        setNameDisplay('');
+        setTimeDisplay('');
         setIngredient([]);
         setDescription([]);
     }
@@ -114,13 +131,13 @@ function RecipeCreate ()  {
 
     const removeName = () => {
         showAlert(true, 'danger', 'item is removed')
-        setName('')
+        setNameDisplay('')
     }
 
 
     const removeTime = () => {
         showAlert(true, 'danger', 'item is removed')
-        setTime('')
+        setTimeDisplay('')
     }
 
     const editIngredient = (id) => {
@@ -139,9 +156,18 @@ function RecipeCreate ()  {
 
     const editName = () => {
         setIsEditing(true);
-        setName(name);
+        setName(nameDisplay);
     }
 
+    const editTime = () => {
+        setIsEditing(true);
+        setTime(timeDisplay);
+    }
+
+    useEffect(() => {
+        localStorage.setItem('data',JSON.stringify({name: nameDisplay, time: timeDisplay, ingredient, description}))
+    }, [nameDisplay, timeDisplay, ingredient, description])
+    
     // useEffect(()=> {
     //     localStorage.setItem('data', JSON.stringify(name, time, ingredient, description))
     // }, [ingredient, description, name, time])
@@ -149,7 +175,7 @@ function RecipeCreate ()  {
     return (
         <div className='root'>
             <Grid container spacing={3}>
-                <Grid item xs={12} clasName="alert-section">
+                <Grid item xs={12} className="alert-section">
                 {alert.show && <Alert {...alert} removeAlert={showAlert} ingredient={ingredient} description={description}/>}
                 </Grid>
                 <Grid item xs={12}>
@@ -159,22 +185,26 @@ function RecipeCreate ()  {
                             <TextField
                                 label="Enter name of your recipe" 
                                 type="text"
-                                fullWidth="true"
+                                fullWidth= {true}
                                 value={name}
                                 onChange={(e) => {setName(e.target.value)}}
                     
                             />
+                            <AddCircleIcon className="cursor" onClick={addName}>
+                            </AddCircleIcon>
                             <TextField
                                 label="Add the time needed in minutes" 
                                 type="number"
-                                fullWidth="true"
+                                fullWidth={true}
                                 value={time}
                                 onChange={(e) => {setTime(e.target.value)}}
                             />
+                            <AddCircleIcon className="cursor" onClick={addTime}>
+                            </AddCircleIcon>
                             <TextField
                                 label="Add your ingredient one by one" 
                                 type="text"
-                                fullWidth="true"
+                                fullWidth={true}
                                 value={ingredientName}
                                 onChange={(e) => {setIngredientName(e.target.value)}}
                             />
@@ -183,7 +213,7 @@ function RecipeCreate ()  {
                             <TextField
                                 label="Add neccessary steps one by one" 
                                 type="text"
-                                fullWidth="true"
+                                fullWidth={true}
                                 value={descriptionName}
                                 onChange={(e) => {setDescriptionName(e.target.value)}}
                             />
@@ -191,7 +221,7 @@ function RecipeCreate ()  {
                             </AddCircleIcon>
 
                         </div>
-                        <button className="btn" onClick={submitButton}>submit</button>
+                        
                     </Paper>
                 </Grid>
 
@@ -199,7 +229,8 @@ function RecipeCreate ()  {
                     <Paper className='paper' elevation={3}>
                         <h3>Your magic recipe </h3>
                         <List 
-                            name={name} 
+                            nameDisplay={nameDisplay}
+                            timeDisplay={timeDisplay} 
                             time={time} 
                             ingredients={ingredient} 
                             descriptions={description} 
@@ -210,8 +241,10 @@ function RecipeCreate ()  {
                             editIngredient={editIngredient}
                             editDescription={editDescription}
                             editName={editName}
+                            editTime={editTime}
                             />
                         <button className="btn" onClick={clearList}>clear all</button>
+                        <button className="btn" onClick={submitButton}>submit</button>
                     </Paper>
                     
                 </Grid>

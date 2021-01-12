@@ -2,12 +2,12 @@ import React from 'react'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
 
-const List = ({name, time, ingredients, descriptions, removeIngredient, removeDescription, removeName, removeTime, editIngredient, editDescription, editName}) => {
+const List = ({nameDisplay, timeDisplay, ingredients, descriptions, removeIngredient, removeDescription, removeName, removeTime, editIngredient, editDescription, editName, editTime}) => {
     return (
         <div className="grocery-list">    
                     <article className="grocery-item">
                         <h4>name: </h4>
-                        <p className="title">{name}</p>
+                        <p className="title">{nameDisplay}</p>
                         <div className="btn-container">
                             <button type="button" className="edit-btn"
                                 onClick={() => {editName()}}>
@@ -22,10 +22,10 @@ const List = ({name, time, ingredients, descriptions, removeIngredient, removeDe
 
                     <article className="grocery-item">
                         <h4>Time: </h4>
-                        <p>{time} {time ? 'minutes' : ''}</p>
+                        <p className="title">{timeDisplay} {timeDisplay ? 'minutes' : ''}</p>
                         <div className="btn-container">
                             <button type="button" className="edit-btn"
-                                onClick={() => {}}>
+                                onClick={() => {editTime()}}>
                                 <FaEdit/>
                             </button>
                             <button type="button" className="delete-btn"
@@ -36,7 +36,7 @@ const List = ({name, time, ingredients, descriptions, removeIngredient, removeDe
                     </article>
                     <article className="grocery-item">
                         <h4>Ingredients: </h4>
-                        <ul> 
+                        <ul className="ul"> 
                         {ingredients.map((item) => {
                             const {id, ingredientName} = item
                             return (
@@ -55,8 +55,7 @@ const List = ({name, time, ingredients, descriptions, removeIngredient, removeDe
                                 </li>
                             )
                         })}
-                        </ul>
-                      
+                        </ul> 
                     </article>
 
                     <article className="grocery-item">
