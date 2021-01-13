@@ -4,18 +4,19 @@ import { TextField } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import List from './List'
-import Alert from './Alert'
+import List from './List';
+import Alert from './Alert';
+import axios from 'axios';
+
+const URL = 'https://dpsbootcamp.herokuapp.com/api/v1recipes';
 
 const getLocalStorage = () => {
     let data = localStorage.getItem('data');
     if (data) {
-        return console.log(JSON.parse(localStorage.getItem('data')))
+        return localStorage.getItem('data')
     }
     else {
         return []
-
-        
     }
 }
 
@@ -104,11 +105,42 @@ function RecipeCreate ()  {
             
     }
 
-    const submitButton = (e) => {
+    const postRecipe = () => {
+        // console.log(getLocalStorage());
+        //  try {
+        //      await fetch(URL, {
+        //          method: 'POST',
+        //          body: JSON.stringify({title: nameDisplay}),
+        //          mode: 'no-cors'
+        //      });
+        //  } catch(error) {
+        //      console.log(error);
+        //  }
+
+        axios({
+            url: URL,
+            method: 'post',
+            mode: 'no-cors',
+            data: {
+                ingredients: ["asdas", "adas"],
+                desctriptions: ["sad", "asda"],
+                title: "TEEEEEEEEEST",
+                time: "20"
+            }
+           
+        })
+        .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+     }; 
+    
+    const submitButton =  ((e) => {
         e.preventDefault();
-        getLocalStorage();
-        
-    }
+        postRecipe();
+    })
 
     const clearList = () => {
         showAlert(true, 'danger', 'emptylist')
@@ -164,10 +196,15 @@ function RecipeCreate ()  {
         setTime(timeDisplay);
     }
 
+    // useEffect(()=> {
+    //     postRecipe();
+    // }, [submitButton])
+
     useEffect(() => {
-        localStorage.setItem('data',JSON.stringify({name: nameDisplay, time: timeDisplay, ingredient, description}))
+        localStorage.setItem('data',JSON.stringify({title: nameDisplay, time: timeDisplay, ingredients: ingredient.map((el) => el.ingredientName), descriptions: description.map((el) => el.descriptionName)}))
     }, [nameDisplay, timeDisplay, ingredient, description])
-    
+
+
     // useEffect(()=> {
     //     localStorage.setItem('data', JSON.stringify(name, time, ingredient, description))
     // }, [ingredient, description, name, time])
