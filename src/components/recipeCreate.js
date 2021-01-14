@@ -8,7 +8,7 @@ import List from './List';
 import Alert from './Alert';
 import axios from 'axios';
 
-const URL = 'https://dpsbootcamp.herokuapp.com/api/v1recipes';
+const URL = 'https://dpsbootcamp.herokuapp.com/api/v1/recipes';
 
 const getLocalStorage = () => {
     let data = localStorage.getItem('data');
@@ -120,13 +120,14 @@ function RecipeCreate ()  {
         axios({
             url: URL,
             method: 'post',
-            mode: 'no-cors',
-            data: {
-                ingredients: ["asdas", "adas"],
-                desctriptions: ["sad", "asda"],
-                title: "TEEEEEEEEEST",
-                time: "20"
-            }
+            mode: 'cors',
+            headers: {"Access-Control-Allow-Origin": "*"},
+            data: JSON.stringify({ 
+                "ingredients": "dsa",
+                "desctriptions": "sad",
+                "title": "bla2",
+                "time": "20"
+            })
            
         })
         .then(function (response) {
