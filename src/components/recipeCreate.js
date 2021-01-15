@@ -10,6 +10,7 @@ import axios from 'axios';
 
 const URL = 'https://dpsbootcamp.herokuapp.com/api/v1/recipes';
 
+
 const getLocalStorage = () => {
     let data = localStorage.getItem('data');
     if (data) {
@@ -105,37 +106,42 @@ function RecipeCreate ()  {
             
     }
 
-    const postRecipe = () => {
-        // console.log(getLocalStorage());
-        //  try {
-        //      await fetch(URL, {
-        //          method: 'POST',
-        //          body: JSON.stringify({title: nameDisplay}),
-        //          mode: 'no-cors'
-        //      });
-        //  } catch(error) {
-        //      console.log(error);
-        //  }
+    const myJSON = JSON.stringify({title: nameDisplay, time: timeDisplay, ingredients: ingredient.map((el) => el.ingredientName), descriptions: description.map((el) => el.descriptionName)});
 
-        axios({
-            url: URL,
-            method: 'post',
-            mode: 'cors',
-            headers: {"Access-Control-Allow-Origin": "*"},
-            data: JSON.stringify({ 
-                "ingredients": "dsa",
-                "desctriptions": "sad",
-                "title": "bla2",
-                "time": "20"
-            })
+    const postRecipe = async () => {
+
+        console.log(myJSON);
+         try {
+             await fetch(URL, {
+                 method: 'POST',
+                 headers: {
+                    'Content-Type': 'application/json',
+                  },
+                 body: myJSON,
+             });
+         } catch(error) {
+             console.log(error);
+         }
+
+        // axios({
+        //     url: URL,
+        //     method: 'post',
+        //     mode: 'cors',
+        //     headers: {"Access-Control-Allow-Origin": "*"},
+        //     data: JSON.stringify({ 
+        //         "ingredients": "dsa",
+        //         "desctriptions": "sad",
+        //         "title": "bla2",
+        //         "time": "20"
+        //     })
            
-        })
-        .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        // })
+        // .then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
      }; 
     
     const submitButton =  ((e) => {
